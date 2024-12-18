@@ -40,10 +40,10 @@ class CalculatorApp(ft.Container):
                             button_clicked=self.button_clicked,
                             action="negate",
                         ),
-                        ActionButton(
+                        OperatorButton(
                             text="%",
                             button_clicked=self.button_clicked,
-                            action="percent",
+                            operations="mod",
                         ),
 
                         OperatorButton(
@@ -56,8 +56,6 @@ class CalculatorApp(ft.Container):
                 ft.Row(
                     expand=True,
                     controls=[
-                        ActionButton(
-                            text="1/x", button_clicked=self.button_clicked, action="fraction"),
                         DigitButton(
                             text="7", button_clicked=self.button_clicked, value=7),
                         DigitButton(
@@ -160,13 +158,13 @@ class CalculatorApp(ft.Container):
                     -1*float(self.result.value)
                 )
             )
-        elif action == "percent":
-            self.result.value = str(
-                self.format_number(
-                    float(self.result.value) / 100
-                )
-            )
-            self.reset()
+        # elif action == "percent":
+        #     self.result.value = str(
+        #         self.format_number(
+        #             float(self.result.value) / 100
+        #         )
+        #     )
+        #     self.reset()
         elif action == "calculate":
             self.result.value = self.format_number(
                 self.calculate(
@@ -178,10 +176,6 @@ class CalculatorApp(ft.Container):
             self.result.value = self.result.value[:-1]
             if self.result.value == "":
                 self.result.value = "0"
-        elif action == "fraction":
-            self.result.value = self.format_number(
-                1 / float(self.result.value)
-            )
         else:
             raise ValueError("Invalid action")
 
