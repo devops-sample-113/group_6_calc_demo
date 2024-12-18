@@ -18,6 +18,16 @@ class TestButtons(unittest.TestCase):
         self.assertEqual(button.type, "action")
         self.assertEqual(button.action, "clear")
 
+    def test_action_button(self):
+        button = ActionButton(text="1/x", button_clicked=None, action="fraction")
+        self.assertEqual(button.type, "action")
+        self.assertEqual(button.action, "fraction")
+
+    def test_action_button(self):
+        button = ActionButton(text="10^x", button_clicked=None, action="10^")
+        self.assertEqual(button.type, "action")
+        self.assertEqual(button.action, "10^")
+
 
 if __name__ == "__main__":
     unittest.main()
