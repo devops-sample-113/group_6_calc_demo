@@ -1,6 +1,7 @@
 import flet as ft
 from calculate import Calculator
 from buttons import DigitButton, OperatorButton, ActionButton
+import math
 
 
 class CalculatorApp(ft.Container):
@@ -40,10 +41,10 @@ class CalculatorApp(ft.Container):
                             button_clicked=self.button_clicked,
                             action="negate",
                         ),
-                        OperatorButton(
+                        ActionButton(
                             text="%",
                             button_clicked=self.button_clicked,
-                            operations="mod",
+                            action="percent",
                         ),
 
                         OperatorButton(
@@ -106,6 +107,26 @@ class CalculatorApp(ft.Container):
                             text="=", button_clicked=self.button_clicked, action="calculate"),
                     ]
                 ),
+                ft.Row(
+                    expand=True,
+                    controls=[
+                        ActionButton(
+                            text="sin",
+                            button_clicked=self.button_clicked,
+                            action="sin",
+                        ),
+                        ActionButton(
+                            text="cos",
+                            button_clicked=self.button_clicked,
+                            action="cos",
+                        ),
+                        ActionButton(
+                            text="tan",
+                            button_clicked=self.button_clicked,
+                            action="tan",
+                        ),
+                    ]
+                ),
             ]
         )
         return ui
@@ -158,13 +179,13 @@ class CalculatorApp(ft.Container):
                     -1*float(self.result.value)
                 )
             )
-        # elif action == "percent":
-        #     self.result.value = str(
-        #         self.format_number(
-        #             float(self.result.value) / 100
-        #         )
-        #     )
-        #     self.reset()
+        elif action == "percent":
+            self.result.value = str(
+                self.format_number(
+                    float(self.result.value) / 100
+                )
+            )
+            self.reset()
         elif action == "calculate":
             self.result.value = self.format_number(
                 self.calculate(
@@ -176,6 +197,27 @@ class CalculatorApp(ft.Container):
             self.result.value = self.result.value[:-1]
             if self.result.value == "":
                 self.result.value = "0"
+        elif action == "sin":
+            self.result.value = str(
+                self.format_number(
+                    math.sin(math.radians(float(self.result.value)))
+                )
+            )
+            self.reset()
+        elif action == "cos":
+            self.result.value = str(
+                self.format_number(
+                    math.cos(math.radians(float(self.result.value)))
+                )
+            )
+            self.reset()
+        elif action == "tan":
+            self.result.value = str(
+                self.format_number(
+                    math.tan(math.radians(float(self.result.value)))
+                )
+            )
+            self.reset()
         else:
             raise ValueError("Invalid action")
 

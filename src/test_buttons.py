@@ -17,6 +17,18 @@ class TestButtons(unittest.TestCase):
         button = ActionButton(text="AC", button_clicked=None, action="clear")
         self.assertEqual(button.type, "action")
         self.assertEqual(button.action, "clear")
+    def test_sin_button(self):
+        button = ActionButton(text="sin", button_clicked=None, action="sin")
+        self.assertEqual(button.type, "action")
+        self.assertEqual(button.action, "sin")
+    def test_cos_button(self):
+        button = ActionButton(text="cos", button_clicked=None, action="cos")
+        self.assertEqual(button.type, "action")
+        self.assertEqual(button.action, "cos")
+    def test_tan_button(self):
+        button = ActionButton(text="tan", button_clicked=None, action="tan")
+        self.assertEqual(button.type, "action")
+        self.assertEqual(button.action, "tan")
 
 
 if __name__ == "__main__":
