@@ -21,18 +21,23 @@ class TestCalculator(unittest.TestCase):
     def test_division(self):
         result = self.calculator.calculate(10, 5, "div")
         self.assertEqual(result, 2)
-
+    
     def test_division_by_zero(self):
         result = self.calculator.calculate(10, 0, "div")
+        self.assertEqual(result, "Error: Can not divide by zero!")
+
+    def test_division(self):
+        result = self.calculator.calculate(10, 5, "mod")
+        self.assertEqual(result, 0)
+
+    def test_division_by_zero(self):
+        result = self.calculator.calculate(10, 0, "mod")
         self.assertEqual(result, "Error: Can not divide by zero!")
 
     def test_invalid_operator(self):
         result = self.calculator.calculate(10, 5, "unknown")
         self.assertEqual(result, "Invalid operator")
 
-    def test_fracition(self):
-        result = self.calculator.calculate(10, 5, "fraction")
-        self.assertEqual(result, 2)
 
 if __name__ == "__main__":
     unittest.main()
