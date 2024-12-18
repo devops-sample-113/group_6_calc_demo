@@ -18,6 +18,16 @@ class TestButtons(unittest.TestCase):
         self.assertEqual(button.type, "action")
         self.assertEqual(button.action, "clear")
 
+    def test_abs_button(self):
+        button = ActionButton(text="|X|", button_clicked=None, action="clear")
+        self.assertEqual(button.type, "action")
+        self.assertEqual(button.action, "clear")
+
+    def test_sqrt_button(self):
+        button = ActionButton(text="√x", button_clicked=None, action="clear")
+        self.assertEqual(button.type, "action")
+        self.assertEqual(button.action, "clear")
+
 
 if __name__ == "__main__":
     unittest.main()

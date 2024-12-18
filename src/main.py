@@ -1,6 +1,7 @@
 import flet as ft
 from calculate import Calculator
 from buttons import DigitButton, OperatorButton, ActionButton
+import math
 
 
 class CalculatorApp(ft.Container):
@@ -40,10 +41,10 @@ class CalculatorApp(ft.Container):
                             button_clicked=self.button_clicked,
                             action="negate",
                         ),
-                        OperatorButton(
+                        ActionButton(
                             text="%",
                             button_clicked=self.button_clicked,
-                            operations="mod",
+                            action="percent",
                         ),
 
                         OperatorButton(
@@ -51,6 +52,24 @@ class CalculatorApp(ft.Container):
                             button_clicked=self.button_clicked,
                             operations="div",
                         ),
+                    ]
+                ),
+                ft.Row(
+                    expand=True,
+                    controls=[
+                        # OperatorButton(
+                        #     text="x^y", button_clicked=self.button_clicked, action="power"),
+                        ActionButton(
+                            text="|X|",
+                            button_clicked=self.button_clicked,
+                            action="abs",
+                        ),
+                        ActionButton(
+                            text="√x",
+                            button_clicked=self.button_clicked,
+                            action="power",
+                        ),
+
                     ]
                 ),
                 ft.Row(
@@ -158,13 +177,13 @@ class CalculatorApp(ft.Container):
                     -1*float(self.result.value)
                 )
             )
-        # elif action == "percent":
-        #     self.result.value = str(
-        #         self.format_number(
-        #             float(self.result.value) / 100
-        #         )
-        #     )
-        #     self.reset()
+        elif action == "percent":
+            self.result.value = str(
+                self.format_number(
+                    float(self.result.value) / 100
+                )
+            )
+            self.reset()
         elif action == "calculate":
             self.result.value = self.format_number(
                 self.calculate(
@@ -172,10 +191,17 @@ class CalculatorApp(ft.Container):
                 )
             )
             self.reset()
-        elif action == "backspace":
-            self.result.value = self.result.value[:-1]
-            if self.result.value == "":
-                self.result.value = "0"
+        elif action =='abs':
+            self.result.value = str(abs(self.result.value))
+            self.reset()
+        elif action =='power':
+            self.result.value = str(
+                self.format_number(
+                    float(self.result.value)**0.5
+                )
+            )
+            # self.result.value = str(math.pow(self.result.value, 0.5))
+            self.reset()
         else:
             raise ValueError("Invalid action")
 
