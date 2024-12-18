@@ -29,10 +29,14 @@ class TestCalculator(unittest.TestCase):
     def test_invalid_operator(self):
         result = self.calculator.calculate(10, 5, "unknown")
         self.assertEqual(result, "Invalid operator")
+    
+    def test_fraction(self):
+        result = self.calculator.calculate(2, "fraction")
+        self.assertEqual(result, 0.5)
 
-    def test_fracition(self):
-        result = self.calculator.calculate(10, 5, "fraction")
-        self.assertEqual(result, 2)
+    def test_tention(self):
+        result = self.calculator.calculate(3, "10^")
+        self.assertEqual(result, 1000)
 
 if __name__ == "__main__":
     unittest.main()
