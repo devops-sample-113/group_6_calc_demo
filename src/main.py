@@ -71,6 +71,8 @@ class CalculatorApp(ft.Container):
                 ft.Row(
                     expand=True,
                     controls=[
+                        ActionButton(
+                            text="10^x", button_clicked=self.button_clicked, action="10^"),
                         DigitButton(
                             text="4", button_clicked=self.button_clicked, value=4),
                         DigitButton(
@@ -182,6 +184,11 @@ class CalculatorApp(ft.Container):
            self.result.value = self.format_number(
             1 / float(self.result.value)
         )
+        elif action == "10^":
+            x=1
+            for i in range(int(self.result.value)):
+                x=x*10
+            self.result.value=int(x)
         else:
             raise ValueError("Invalid action")
 
