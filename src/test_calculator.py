@@ -30,6 +30,9 @@ class TestCalculator(unittest.TestCase):
         result = self.calculator.calculate(10, 5, "unknown")
         self.assertEqual(result, "Invalid operator")
 
+    def test_fracition(self):
+        result = self.calculator.calculate(10, 5, "fraction")
+        self.assertEqual(result, 2)
 
 if __name__ == "__main__":
     unittest.main()

@@ -56,6 +56,8 @@ class CalculatorApp(ft.Container):
                 ft.Row(
                     expand=True,
                     controls=[
+                        ActionButton(
+                            text="1/x", button_clicked=self.button_clicked, action="fraction"),
                         DigitButton(
                             text="7", button_clicked=self.button_clicked, value=7),
                         DigitButton(
@@ -172,6 +174,14 @@ class CalculatorApp(ft.Container):
                 )
             )
             self.reset()
+        elif action == "backspace":
+            self.result.value = self.result.value[:-1]
+            if self.result.value == "":
+                self.result.value = "0"
+        elif action == "fraction":
+            self.result.value = self.format_number(
+                1 / float(self.result.value)
+            )
         else:
             raise ValueError("Invalid action")
 
