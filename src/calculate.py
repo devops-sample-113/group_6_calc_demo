@@ -1,17 +1,22 @@
 class Calculator:
-    def __init__(self):
+    def init(self):
         self.operations = {
             "add": self.add,
             "sub": self.subtract,
             "mul": self.multiply,
             "div": self.divide,
-            "mod": self.mod,
+            "squ2": self.squared2,
+            "squ3": self.squared3,
         }
 
-    def calculate(self, operand1, operand2, operator):
+    def calculate(self, operand1, operand2=None, operator=None):
         if operator in self.operations:
             try:
-                result = self.operations[operator](operand1, operand2)
+                # Special handling for square and cube, as they only need one operand
+                if operator in ["squ2", "squ3"]:
+                    result = self.operations[operator](operand1)
+                else:
+                    result = self.operations[operator](operand1, operand2)
                 return self.format_number(result)
             except ValueError as e:
                 return str(e)
@@ -30,19 +35,27 @@ class Calculator:
 
     def multiply(self, x, y):
         return x * y
+    
+    def squared2(self, x):
+        return x * x * x
+
+    def squared3(self, x, y):
+        if y == 0:
+            raise ValueError("Error: Can not divide by zero!")
+        return x / y
+
 
     def divide(self, x, y):
         if y == 0:
             raise ValueError("Error: Can not divide by zero!")
         return x / y
-    def mod(self, x, y):
-        if y == 0:
-            raise ValueError("Error: Can not divide by zero!")
-        return x % y
 
-
-
-if __name__ == "__main__":
+if  __name__ == "main":
     calculator = Calculator()
-    print(calculator.calculate(10, 5, "+"))  # 15
-    print(calculator.calculate(10, 0, "/"))  # Error: Can not divide by zero!
+
+    # Example calculations
+    print(calculator.calculate(10, 5, "add"))  # 15
+    print(calculator.calculate(10, 0, "div"))  # Error: Can not divide by zero!
+    print(calculator.calculate(3, None, "squ2"))  # 9
+    print(calculator.calculate(2, None, "squ3"))  # 8
+    print(calculator.calculate(10, 5, "mul"))  # 50

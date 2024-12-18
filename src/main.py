@@ -40,12 +40,21 @@ class CalculatorApp(ft.Container):
                             button_clicked=self.button_clicked,
                             action="negate",
                         ),
-                        OperatorButton(
+                        ActionButton(
                             text="%",
                             button_clicked=self.button_clicked,
-                            operations="mod",
+                            action="percent",
                         ),
-
+                        ActionButton(
+                            text="x²",
+                            button_clicked=self.button_clicked,
+                            action="squ2",
+                        ),
+                        ActionButton(
+                            text="x³",
+                            button_clicked=self.button_clicked,
+                            action="squ3",
+                        ),
                         OperatorButton(
                             text="÷",
                             button_clicked=self.button_clicked,
@@ -158,13 +167,26 @@ class CalculatorApp(ft.Container):
                     -1*float(self.result.value)
                 )
             )
-        # elif action == "percent":
-        #     self.result.value = str(
-        #         self.format_number(
-        #             float(self.result.value) / 100
-        #         )
-        #     )
-        #     self.reset()
+        elif action == "percent":
+            self.result.value = str(
+                self.format_number(
+                    float(self.result.value) / 100
+                )
+            )
+            self.reset()
+
+        elif action == "squ2":
+            self.result.value = str(
+                self.format_number(
+                        float(self.result.value)**2
+                    )
+             )
+        elif action == "squ3":
+            self.result.value = str(
+                self.format_number(
+                    float(self.result.value) **3
+                )
+            )
         elif action == "calculate":
             self.result.value = self.format_number(
                 self.calculate(
@@ -172,10 +194,6 @@ class CalculatorApp(ft.Container):
                 )
             )
             self.reset()
-        elif action == "backspace":
-            self.result.value = self.result.value[:-1]
-            if self.result.value == "":
-                self.result.value = "0"
         else:
             raise ValueError("Invalid action")
 
